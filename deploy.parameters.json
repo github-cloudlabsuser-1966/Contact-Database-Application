@@ -4,6 +4,9 @@
   "parameters": {
     "webAppName": {
       "value": "crud-application-123"
+    },
+    "sku": {
+      "value": "F1"
     }
   }
 }
