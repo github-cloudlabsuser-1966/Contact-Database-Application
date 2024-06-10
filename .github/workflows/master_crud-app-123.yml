@@ -26,13 +26,13 @@ jobs:
         run: nuget restore
 
       - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Build /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:PublishUrl=$(Build.ArtifactStagingDirectory)
+        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: ASP-app
-          path: '$(Build.ArtifactStagingDirectory)/**'
+          path: '/published/**'
 
   deploy:
     runs-on: windows-latest
@@ -65,3 +65,4 @@ jobs:
           app-name: 'crud-app-123'
           slot-name: 'production'
           package: .
+          
