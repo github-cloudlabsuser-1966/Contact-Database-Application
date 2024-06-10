@@ -38,7 +38,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'production'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
@@ -52,17 +52,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          enable-AzPSSession: true
-          client-id: ${{ secrets.CLIENT_ID }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-          auth-type: IDENTITY
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_BC6C32187AC0419CA350C71A8C17551D }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_07B40D4EDD4F407C8F345B25B79A6B21 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2B0BF7727680467B8E0ACC7354D2DB70 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'crud-app-123'
-          slot-name: 'production'
+          slot-name: 'Production'
           package: .
           
