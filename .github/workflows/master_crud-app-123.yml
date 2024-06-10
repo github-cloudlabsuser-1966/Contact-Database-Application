@@ -19,14 +19,11 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '8.x'
+          dotnet-version: '6.0.x'
           include-prerelease: true
 
-      - name: Restore NuGet packages
-        run: dotnet restore
-
       - name: Build with dotnet
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
@@ -51,13 +48,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-
+      
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_420B843CBEBD4BD0BF849F85EFC15368 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D00222C5FC7D492E8BB063B30779F85B }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0331C8DF5A4549959407CD47C05FD9E4 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_04127200C2044DD593186A53A7EEF0EA }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1907A53617164003A378BCB775CE7CF4 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4D7E91B345064535A0BDD4D4DF1B95D2 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -66,3 +63,4 @@ jobs:
           app-name: 'crud-app-123'
           slot-name: 'Production'
           package: .
+          
