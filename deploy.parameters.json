@@ -3,13 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "webAppName": {
-      "value": "crud-application-2"
-    },
-    "hostingPlanName": {
-      "value": "ca2-hosting-plan"
-    },
-    "sku": {
-      "value": "F1"
+      "value": "crud-application-123"
     }
   }
 }

@@ -7,41 +7,17 @@
       "metadata": {
         "description": "The name of the web app that you wish to create."
       }
-    },
-    "hostingPlanName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the App Service plan to use for hosting the web app."
-      }
-    },
-    "sku": {
-      "type": "string",
-      "defaultValue": "F1",
-      "metadata": {
-        "description": "The pricing tier for the App Service plan."
-      }
     }
   },
   "resources": [
     {
-      "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2020-06-01",
-      "name": "[parameters('hostingPlanName')]",
-      "location": "[resourceGroup().location]",
-      "sku": {
-        "name": "[parameters('sku')]"
-      }
-    },
-    {
       "type": "Microsoft.Web/sites",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2018-11-01",
       "name": "[parameters('webAppName')]",
       "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
-      ],
+      "kind": "app",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('webAppName'))]"
       }
     }
   ]
